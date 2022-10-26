@@ -17,9 +17,11 @@
 		EEE61BFC2907FBA6003605D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEE61BFA2907FBA6003605D9 /* Main.storyboard */; };
 		EEE61BFE2907FBA8003605D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEE61BFD2907FBA8003605D9 /* Assets.xcassets */; };
 		EEE61C012907FBA8003605D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEE61BFF2907FBA8003605D9 /* LaunchScreen.storyboard */; };
+		EEF07411290927BB001069E3 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF07410290927BB001069E3 /* Game.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EE52CEBB2909773100EDD745 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EEB84DCF29081EF6001322E2 /* Bird.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bird.swift; sourceTree = "<group>"; };
 		EEB84DD12908211E001322E2 /* FinalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalViewController.swift; sourceTree = "<group>"; };
 		EEE61BED2907FBA6003605D9 /* FollowTheOrder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FollowTheOrder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,6 +33,7 @@
 		EEE61BFB2907FBA6003605D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EEE61BFD2907FBA8003605D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEE61C002907FBA8003605D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EEF07410290927BB001069E3 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,11 +66,13 @@
 		EEE61BEF2907FBA6003605D9 /* FollowTheOrder */ = {
 			isa = PBXGroup;
 			children = (
+				EE52CEBB2909773100EDD745 /* Info.plist */,
 				EEE61BF02907FBA6003605D9 /* AppDelegate.swift */,
 				EEE61BF22907FBA6003605D9 /* GameScene.sks */,
 				EEE61BF42907FBA6003605D9 /* Actions.sks */,
 				EEE61BF62907FBA6003605D9 /* GameScene.swift */,
 				EEB84DCF29081EF6001322E2 /* Bird.swift */,
+				EEF07410290927BB001069E3 /* Game.swift */,
 				EEE61BF82907FBA6003605D9 /* GameViewController.swift */,
 				EEB84DD12908211E001322E2 /* FinalViewController.swift */,
 				EEE61BFA2907FBA6003605D9 /* Main.storyboard */,
@@ -151,6 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEB84DD22908211E001322E2 /* FinalViewController.swift in Sources */,
+				EEF07411290927BB001069E3 /* Game.swift in Sources */,
 				EEE61BF72907FBA6003605D9 /* GameScene.swift in Sources */,
 				EEE61BF92907FBA6003605D9 /* GameViewController.swift in Sources */,
 				EEB84DD029081EF6001322E2 /* Bird.swift in Sources */,
@@ -303,6 +309,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 83DGL53YN8;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FollowTheOrder/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -331,6 +338,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 83DGL53YN8;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FollowTheOrder/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

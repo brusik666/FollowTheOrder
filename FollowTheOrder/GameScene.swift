@@ -10,8 +10,6 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
     private var background = SKSpriteNode(imageNamed: "back")
     private let bird = SKSpriteNode(imageNamed: "bird")
     private lazy var startGameButton: SKLabelNode = {
@@ -25,13 +23,16 @@ class GameScene: SKScene {
     }()
     private var playerScore = 0
     var birdsCenteredPositions = [(Int,Int)]()
-    
+    var birdsCount: Int {
+        return 5 + playerScore
+    }
     
     override func didMove(to view: SKView) {
 
         background.size.height = frame.height
         background.size.width = frame.width
         background.zPosition = 1
+        background.blendMode = .alpha
         addChild(background)
         background.addChild(startGameButton)
         
@@ -39,62 +40,50 @@ class GameScene: SKScene {
     
     
     func newRound() {
-        createBirds(playerScore: playerScore)
+        createBirds(birdNumber: 1)
     }
     
     func random() -> (Int, Int) {
-        let width = UIScreen.main.bounds.width/2 - 50
-        let height = UIScreen.main.bounds.height/2 - 50
+        let width = UIScreen.main.bounds.width/2 - 35
+        let height = UIScreen.main.bounds.height/2 - 35
         let xPosition = Int.random(in: Int(-width)...Int(width))
         let yPosition = Int.random(in: Int(-height)...Int(height))
         return (xPosition, yPosition)
     }
-    private func createBirds(playerScore: Int) {
-        for birdNumber in 1...(5 + playerScore) {
-            let bird = SKSpriteNode(imageNamed: "bird")
+
+    func createBirds(birdNumber: Int) {
+        let wait = SKAction.wait(forDuration: 1)
+        let block = SKAction.run { [unowned self] in
+            let bird = Bird(imageNamed: "bird")
             bird.name = String(birdNumber)
-            bird.size.height = 100
-            bird.size.width = 100
+            bird.size.height = 70
+            bird.size.width = 70
             bird.zPosition = 2
             bird.position = CGPoint(x: random().0, y: random().1)
             addChild(bird)
-            let delayAction = SKAction.wait(forDuration: 1)
+            bird.shakeAnimation()
         }
-    }
-    func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
-    }
-    
-    func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
+        let sequence = SKAction.sequence([block, wait])
+        let loop = SKAction.repeat(sequence, count: birdsCount)
+        run(loop)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
-            print(touchedNode.name)
-            print(touchedNode.zPosition)
             if touchedNode.name == "startgame" {
                 touchedNode.removeFromParent()
                 self.newRound()
             }
+            
+            if let birdNode = touchedNode as? Bird {
+                birdNode.successAnimation()
+            }
         }
+    }
+    
+    func isOrderOfPickingBirdCorrect() {
+        
     }
 }
