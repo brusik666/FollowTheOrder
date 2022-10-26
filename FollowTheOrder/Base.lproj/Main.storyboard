@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UNW-pa-7h0">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -25,7 +25,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="822" y="113"/>
+            <point key="canvasLocation" x="1731.8840579710147" y="112.5"/>
         </scene>
         <!--Final View Controller-->
         <scene sceneID="08g-vc-IzT">
@@ -34,32 +34,63 @@
                     <view key="view" contentMode="scaleToFill" id="k8H-tP-4sV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjx-jt-r7a">
+                                <rect key="frame" x="173.5" y="766" width="67" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="6Wo-JC-rbM"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                <connections>
+                                    <action selector="continueGameButtonTapped:" destination="1a0-QK-mTp" eventType="touchUpInside" id="RDt-Ee-Ndz"/>
+                                    <segue destination="VlB-WS-aiQ" kind="unwind" unwindAction="unwindToGameViewControllerWithUnwindSegue:" id="yEO-Ye-uOK"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5AQ-VG-njt">
+                                <rect key="frame" x="186.5" y="438" width="41.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="yIF-UA-nkC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tjx-jt-r7a" firstAttribute="centerX" secondItem="k8H-tP-4sV" secondAttribute="centerX" id="4qA-cl-KCU"/>
+                            <constraint firstItem="5AQ-VG-njt" firstAttribute="centerY" secondItem="k8H-tP-4sV" secondAttribute="centerY" id="8wM-eo-pMT"/>
+                            <constraint firstItem="5AQ-VG-njt" firstAttribute="centerX" secondItem="k8H-tP-4sV" secondAttribute="centerX" id="Kwi-aa-LZq"/>
+                            <constraint firstItem="yIF-UA-nkC" firstAttribute="bottom" secondItem="tjx-jt-r7a" secondAttribute="bottom" constant="32" id="mAq-vL-lNO"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="meV-OM-dkr"/>
+                    <connections>
+                        <outlet property="continueGameButton" destination="tjx-jt-r7a" id="XQG-lI-Vsg"/>
+                        <outlet property="finalWordsLabel" destination="5AQ-VG-njt" id="4X8-WJ-nOd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rum-AP-Qb2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="VlB-WS-aiQ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1638" y="113"/>
+            <point key="canvasLocation" x="2547.826086956522" y="112.5"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="VWM-Jc-4TN">
+        <scene sceneID="Zhr-fJ-fSL">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bla-sL-8Im" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UNW-pa-7h0" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vnl-Jq-6si">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VOg-v9-f5O">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BV1-FR-VrT" kind="relationship" relationship="rootViewController" id="EY4-xi-Jrg"/>
+                        <segue destination="BV1-FR-VrT" kind="relationship" relationship="rootViewController" id="uiG-z8-Rqi"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="v4N-l2-l9E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WN6-oN-Xqb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-42.028985507246382" y="112.5"/>
+            <point key="canvasLocation" x="821.73913043478262" y="112.5"/>
         </scene>
     </scenes>
     <resources>
