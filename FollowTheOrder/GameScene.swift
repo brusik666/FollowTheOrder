@@ -10,6 +10,7 @@ import GameplayKit
 
 class GameScene: SKScene {
     
+    var game = Game()
     private var background = SKSpriteNode(imageNamed: "back")
     private lazy var startGameButton: SKLabelNode = {
         let startGameNode = SKLabelNode(text: "START GAME")
@@ -22,8 +23,8 @@ class GameScene: SKScene {
     }()
     
     lazy private var scoreLabel: SKLabelNode = {
-        let scoreLabel = SKLabelNode(text: "YOUR SCORE: \(self.playerScore)" )
-        scoreLabel.position = CGPoint(x: frame.minX + 32, y: frame.maxY - 60)
+        let scoreLabel = SKLabelNode(text: "Current Score: \(self.game.playerScore)" )
+        scoreLabel.position = CGPoint(x: 0, y: frame.maxY - 90)
         scoreLabel.fontColor = SKColor.black
         scoreLabel.fontName = "ArialBoldItalic"
         scoreLabel.zPosition = 2
@@ -31,27 +32,13 @@ class GameScene: SKScene {
     }()
     
     lazy private var bestScoreLabel: SKLabelNode = {
-        let scoreLabel = SKLabelNode(text: "BEST SCORE: \(self.playerScore)" )
-        scoreLabel.position = CGPoint(x: frame.minX + 32, y: frame.maxY - 60)
+        let scoreLabel = SKLabelNode(text: "Best Score: \(self.game.bestPlayerScore)" )
+        scoreLabel.position = CGPoint(x: 0, y: frame.maxY - 60)
         scoreLabel.fontColor = SKColor.black
         scoreLabel.fontName = "ArialBoldItalic"
         scoreLabel.zPosition = 2
         return scoreLabel
     }()
-    
-    private var playerScore = 0 {
-        didSet {
-            scoreLabel.text = "YOUR SCORE: \(self.playerScore)"
-        }
-    }
-    private var bestScore: Int {
-        return 0
-    }
-    var birdsCenteredPositions = [(Int,Int)]()
-    var birdsNumbers = [Int]()
-    var birdsCount: Int {
-        return 5 + playerScore
-    }
     
     override func didMove(to view: SKView) {
 
@@ -66,21 +53,29 @@ class GameScene: SKScene {
     
     
     func newRound() {
-        birdsNumbers = Array(1...self.birdsCount)
+        game.birdsNumbers = Array(1...game.birdsCount)
         createBirds()
         
     }
     
+    func updateCurrentScoreLabel() {
+        self.scoreLabel.text = "Current Score: \(self.game.playerScore)"
+    }
+    
+    func updateBestScoreLabel() {
+        self.bestScoreLabel.text = "Best Score: \(self.game.bestPlayerScore)"
+    }
+    
     func random() -> (Int, Int) {
         let width = UIScreen.main.bounds.width/2 - 35
-        let height = UIScreen.main.bounds.height/2 - 100
+        let height = UIScreen.main.bounds.height/2 - 120
         let xPosition = Int.random(in: Int(-width)...Int(width))
         let yPosition = Int.random(in: Int(-height)...Int(height))
         return (xPosition, yPosition)
     }
 
     func createBirds() {
-        var birdsNumbersArray = Array(1...birdsCount)
+        var birdsNumbersArray = Array(1...game.birdsCount)
         let wait = SKAction.wait(forDuration: 1)
         let block = SKAction.run { [unowned self] in
             let bird = Bird(imageNamed: "bird")
@@ -93,7 +88,7 @@ class GameScene: SKScene {
             bird.shakeAnimation()
         }
         let sequence = SKAction.sequence([block, wait])
-        let loop = SKAction.repeat(sequence, count: birdsCount)
+        let loop = SKAction.repeat(sequence, count: game.birdsCount)
         run(loop)
     }
     
@@ -105,23 +100,31 @@ class GameScene: SKScene {
                 touchedNode.removeFromParent()
                 self.newRound()
                 self.addChild(scoreLabel)
+                self.addChild(bestScoreLabel)
             }
             
             if let birdNode = touchedNode as? Bird {
-                if birdNode.name == String(birdsNumbers.removeFirst()) {
+                if birdNode.name == String(game.birdsNumbers.removeFirst()) {
                     birdNode.successAnimation()
                     birdNode.isUserInteractionEnabled = true
-                    guard birdsNumbers.isEmpty else { break }
+                    guard game.birdsNumbers.isEmpty else { break }
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {[unowned self] in
-                        playerScore += 1
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {[unowned self] in
+                        game.playerScore += 1
+                        if game.playerScore > game.bestPlayerScore {
+                            game.bestPlayerScore = game.playerScore
+                            game.saveBestScore()
+                        }
+                        updateCurrentScoreLabel()
+                        updateBestScoreLabel()
                         background.removeAllChildren()
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "win"), object: nil)
                     }
                 } else {
                     birdNode.failAnimation()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {[unowned self] in
-                        self.playerScore = 0
+                        self.game.playerScore = 0
+                        updateCurrentScoreLabel()
                         self.background.removeAllChildren()
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "loose"), object: nil)
                         

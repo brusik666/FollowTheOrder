@@ -10,16 +10,9 @@ import Foundation
 struct Game {
     
     static let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    let bestGameScoreUrl = documentsDirectory.appendingPathComponent("bestGameScore").appendingPathExtension("plist")
+    static let bestGameScoreUrl = Game.documentsDirectory.appendingPathComponent("bestGameScore").appendingPathExtension("plist")
     
-    var playerScore = 0 {
-        didSet {
-            updatePlayerScoreLabel()
-        }
-    }
-    var updatePlayerScoreLabel: () -> Void = {}
-    var updateBestPlayerScoreLabel: () -> Void = {}
-    
+    var playerScore = 0
     lazy var bestPlayerScore: Int = {
         if let savedBestScore = loadBestScore() {
             return savedBestScore
@@ -27,26 +20,31 @@ struct Game {
             return 0
         }
     }()
-    
-    func newRound() {
-        
+    var birdsNumbers = [Int]()
+    var birdsCount: Int {
+        return 5 + playerScore
     }
+    var updatePlayerScoreLabel: (() -> Void)? = {}
+    var updateBestPlayerScoreLabel: () -> Void = {}
     
-    func createBirds() {
-        
-    }
+    
     
     mutating func saveBestScore() {
         let propertyListEncoder = PropertyListEncoder()
-        let codedData = try? propertyListEncoder.encode(bestPlayerScore)
-        try? codedData?.write(to: bestGameScoreUrl, options: .noFileProtection)
+        do {
+            let codedData = try propertyListEncoder.encode([bestPlayerScore])
+            try codedData.write(to: Game.bestGameScoreUrl, options: .noFileProtection)
+        } catch {
+            print(String(describing: error))
+        }
     }
     
     func loadBestScore() -> Int? {
         let propertyListDecoder = PropertyListDecoder()
-        guard let codedScoreData = try? Data(contentsOf: bestGameScoreUrl) else { return nil }
-        let bestScore = try? propertyListDecoder.decode(Int.self , from: codedScoreData)
-        return bestScore
+        guard let codedScoreData = try? Data(contentsOf: Game.bestGameScoreUrl),
+              let bestScore = try? propertyListDecoder.decode([Int].self, from: codedScoreData) else { return nil }
+        
+        return bestScore.first!
     }
     
 }

@@ -47,9 +47,9 @@
                                     <segue destination="VlB-WS-aiQ" kind="unwind" unwindAction="unwindToGameViewControllerWithUnwindSegue:" id="yEO-Ye-uOK"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5AQ-VG-njt">
-                                <rect key="frame" x="186.5" y="438" width="41.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5AQ-VG-njt">
+                                <rect key="frame" x="32" y="448" width="350" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -58,9 +58,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="tjx-jt-r7a" firstAttribute="centerX" secondItem="k8H-tP-4sV" secondAttribute="centerX" id="4qA-cl-KCU"/>
-                            <constraint firstItem="5AQ-VG-njt" firstAttribute="centerY" secondItem="k8H-tP-4sV" secondAttribute="centerY" id="8wM-eo-pMT"/>
-                            <constraint firstItem="5AQ-VG-njt" firstAttribute="centerX" secondItem="k8H-tP-4sV" secondAttribute="centerX" id="Kwi-aa-LZq"/>
+                            <constraint firstAttribute="trailing" secondItem="5AQ-VG-njt" secondAttribute="trailing" constant="32" id="9Eq-gr-dP9"/>
                             <constraint firstItem="yIF-UA-nkC" firstAttribute="bottom" secondItem="tjx-jt-r7a" secondAttribute="bottom" constant="32" id="mAq-vL-lNO"/>
+                            <constraint firstItem="5AQ-VG-njt" firstAttribute="leading" secondItem="k8H-tP-4sV" secondAttribute="leading" constant="32" id="x8R-cX-IZ6"/>
+                            <constraint firstItem="5AQ-VG-njt" firstAttribute="centerY" secondItem="k8H-tP-4sV" secondAttribute="centerY" id="ypg-6g-Y3h"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="meV-OM-dkr"/>
