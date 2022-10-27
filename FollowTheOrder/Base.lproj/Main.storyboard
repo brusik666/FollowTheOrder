@@ -36,12 +36,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjx-jt-r7a">
-                                <rect key="frame" x="195" y="766" width="24" height="64"/>
+                                <rect key="frame" x="173.5" y="766" width="67" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="6Wo-JC-rbM"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
                                 <connections>
                                     <action selector="continueGameButtonTapped:" destination="1a0-QK-mTp" eventType="touchUpInside" id="RDt-Ee-Ndz"/>
                                     <segue destination="VlB-WS-aiQ" kind="unwind" unwindAction="unwindToGameViewControllerWithUnwindSegue:" id="yEO-Ye-uOK"/>

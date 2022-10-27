@@ -53,6 +53,7 @@ class GameScene: SKScene {
     
     
     func newRound() {
+        
         game.birdsNumbers = Array(1...game.birdsCount)
         createBirds()
     }
@@ -84,7 +85,6 @@ class GameScene: SKScene {
             bird.zPosition = 2
             
             background.addChild(bird)
-            bird.shakeAnimation()
             
             var intersects  = true
             while intersects {
@@ -98,6 +98,7 @@ class GameScene: SKScene {
                 }
             }
             birdsAdded.append(bird)
+            bird.shakeAnimation()
             
         }
         let sequence = SKAction.sequence([block, wait])

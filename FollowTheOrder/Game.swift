@@ -24,10 +24,6 @@ struct Game {
     var birdsCount: Int {
         return 5 + playerScore
     }
-    var updatePlayerScoreLabel: (() -> Void)? = {}
-    var updateBestPlayerScoreLabel: () -> Void = {}
-    
-    
     
     mutating func saveBestScore() {
         let propertyListEncoder = PropertyListEncoder()
@@ -39,7 +35,7 @@ struct Game {
         }
     }
     
-    func loadBestScore() -> Int? {
+    private func loadBestScore() -> Int? {
         let propertyListDecoder = PropertyListDecoder()
         guard let codedScoreData = try? Data(contentsOf: Game.bestGameScoreUrl),
               let bestScore = try? propertyListDecoder.decode([Int].self, from: codedScoreData) else { return nil }
