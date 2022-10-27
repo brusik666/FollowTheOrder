@@ -9,10 +9,10 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
-    
+    var birdsAdded = [Bird]()
     var game = Game()
     private var background = SKSpriteNode(imageNamed: "back")
-    private lazy var startGameButton: SKLabelNode = {
+    private var startGameButton: SKLabelNode = {
         let startGameNode = SKLabelNode(text: "START GAME")
         startGameNode.position = CGPoint(x: 0, y: 0)
         startGameNode.isUserInteractionEnabled = false
@@ -55,7 +55,6 @@ class GameScene: SKScene {
     func newRound() {
         game.birdsNumbers = Array(1...game.birdsCount)
         createBirds()
-        
     }
     
     func updateCurrentScoreLabel() {
@@ -83,9 +82,23 @@ class GameScene: SKScene {
             bird.size.height = 70
             bird.size.width = 70
             bird.zPosition = 2
-            bird.position = CGPoint(x: random().0, y: random().1)
+            
             background.addChild(bird)
             bird.shakeAnimation()
+            
+            var intersects  = true
+            while intersects {
+                bird.position = CGPoint(x: random().0, y: random().1)
+                intersects = false
+                for cBird in birdsAdded {
+                    if bird.intersects(cBird) {
+                        intersects = true
+                        break
+                    }
+                }
+            }
+            birdsAdded.append(bird)
+            
         }
         let sequence = SKAction.sequence([block, wait])
         let loop = SKAction.repeat(sequence, count: game.birdsCount)

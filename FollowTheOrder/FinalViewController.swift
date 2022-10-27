@@ -21,15 +21,7 @@ class FinalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
-        setContinueGameButtonText()
-        getWishFromFortune { result in
-            switch result {
-            case .success(let wish):
-                print(wish)
-            case .failure(let erro):
-                print(erro)
-            }
-        }
+        setContinueGameButtonAndLabelTexts()
         // Do any additional setup after loading the view.
     }
     
@@ -51,7 +43,7 @@ class FinalViewController: UIViewController {
         task.resume()
     }
     
-    private func setContinueGameButtonText() {
+    private func setContinueGameButtonAndLabelTexts() {
         switch victory {
         case true:
             continueGameButton.titleLabel?.text = "Continue game"
